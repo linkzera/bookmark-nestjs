@@ -7,16 +7,16 @@ import {
   ParseIntPipe,
   Patch,
   Post,
-  Query,
   UseGuards,
 } from '@nestjs/common';
-import { JwtGuard } from 'src/auth/guard';
+import { JwtGuard } from '../auth/guard';
 import { BookmarkService } from './bookmark.service';
-import { GetUser } from 'src/auth/decorator';
+import { GetUser } from '../auth/decorator';
 import { NewBookmarkDto } from './dto/new-bookmark.dto';
+import { EditBookmarkDto } from './dto/edit-bookmark.dto';
 
 @UseGuards(JwtGuard)
-@Controller('bookmark')
+@Controller('bookmarks')
 export class BookmarkController {
   constructor(private bookmarkService: BookmarkService) {}
 
@@ -38,7 +38,7 @@ export class BookmarkController {
   @Patch()
   updateBookmark(
     @Body('id', ParseIntPipe) bookmarkId: number,
-    @Body() bookmark: NewBookmarkDto,
+    @Body() bookmark: EditBookmarkDto,
   ) {
     return this.bookmarkService.updateBookmark(bookmarkId, bookmark);
   }

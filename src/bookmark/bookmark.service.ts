@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { PrismaService } from '../prisma/prisma.service';
 import { NewBookmarkDto } from './dto/new-bookmark.dto';
+import { EditBookmarkDto } from './dto/edit-bookmark.dto';
 
 @Injectable()
 export class BookmarkService {
@@ -36,7 +37,7 @@ export class BookmarkService {
   }
 
   //Update
-  async updateBookmark(bookmarkId: number, data: NewBookmarkDto) {
+  async updateBookmark(bookmarkId: number, data: EditBookmarkDto) {
     const updatedBookmark = await this.prisma.bookmark.update({
       where: {
         id: bookmarkId,
